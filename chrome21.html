@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chrome21 Home Inspections | Denver, CO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --chrome-blue: #1E4E8C;
+      --chrome-blue-light: #2E6EC4;
+      --chrome-silver: #B0BEC5;
+      --chrome-silver-light: #ECEFF1;
+      --chrome-dark: #0D1B2A;
+      --chrome-mid: #1A2D42;
+      --chrome-accent: #4FC3F7;
+      --text-light: #E8EDF2;
+      --text-muted: #90A4AE;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--chrome-dark);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(13, 27, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(78, 195, 247, 0.12);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo img {
+      height: 52px;
+      width: 52px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text .brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      color: var(--chrome-accent);
+    }
+
+    .nav-logo-text .sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--chrome-silver);
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--chrome-blue);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--chrome-blue-light);
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--chrome-blue-light);
+      box-shadow: 0 0 20px rgba(78, 195, 247, 0.25);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(30, 78, 140, 0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(78, 195, 247, 0.08) 0%, transparent 60%),
+        linear-gradient(160deg, #0D1B2A 0%, #0F2238 50%, #0D1B2A 100%);
+    }
+
+    /* Diagonal chrome accent line */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 15%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(78,195,247,0.2) 30%, rgba(78,195,247,0.4) 60%, transparent);
+      transform: skewX(-8deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chrome-accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--chrome-accent);
+    }
+
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.4s;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--chrome-accent);
+      display: block;
+    }
+
+    .hero-body {
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: #9FB8D0;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.6s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards 0.8s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--chrome-blue);
+      color: white;
+      padding: 1rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(78,195,247,0.3);
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--chrome-blue-light);
+      box-shadow: 0 4px 32px rgba(30, 78, 140, 0.5), 0 0 0 1px rgba(78,195,247,0.4);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--chrome-silver);
+      padding: 1rem 2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(176,190,197,0.3);
+      transition: all 0.25s;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(176,190,197,0.6);
+      color: white;
+    }
+
+    /* Hero badge */
+    .hero-badge {
+      position: absolute;
+      right: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards 1.2s;
+    }
+
+    .hero-badge-ring {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,195,247,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-badge-ring::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,195,247,0.1);
+    }
+
+    .hero-badge-img {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 24px rgba(30,78,140,0.6));
+    }
+
+    /* ─── PROBLEM SECTION ─── */
+    .section-problem {
+      position: relative;
+      padding: 6rem 3rem;
+      background: linear-gradient(180deg, var(--chrome-dark) 0%, var(--chrome-mid) 100%);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--chrome-accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--chrome-accent);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .problem-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .problem-headline span {
+      color: var(--chrome-accent);
+    }
+
+    .problem-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .problem-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-left: 3px solid var(--chrome-blue);
+      transition: border-color 0.2s;
+    }
+
+    .problem-card:hover {
+      border-left-color: var(--chrome-accent);
+    }
+
+    .problem-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .problem-card-text strong {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 0.25rem;
+    }
+
+    .problem-card-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── GUIDE SECTION ─── */
+    .section-guide {
+      padding: 6rem 3rem;
+      background: var(--chrome-mid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-guide::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,78,140,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .guide-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .guide-inner h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .guide-inner .subhead {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #9FB8D0;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.7;
+    }
+
+    .credentials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .credential-card {
+      padding: 2rem 1.5rem;
+      background: rgba(13,27,42,0.6);
+      border: 1px solid rgba(78,195,247,0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .credential-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--chrome-blue), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .credential-card:hover {
+      border-color: rgba(78,195,247,0.3);
+      transform: translateY(-3px);
+    }
+
+    .credential-card:hover::after {
+      opacity: 1;
+    }
+
+    .credential-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--chrome-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .credential-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ─── PLAN SECTION ─── */
+    .section-plan {
+      padding: 6rem 3rem;
+      background: var(--chrome-dark);
+    }
+
+    .plan-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan-inner h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .plan-inner .subhead {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #9FB8D0;
+      font-size: 1.1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .step {
+      padding: 2.5rem 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--chrome-blue), var(--chrome-accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .step:hover::before { transform: scaleX(1); }
+
+    .step-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(78,195,247,0.08);
+      margin-bottom: 0.75rem;
+      transition: color 0.3s;
+    }
+
+    .step:hover .step-num {
+      color: rgba(78,195,247,0.15);
+    }
+
+    .step h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .step p strong {
+      color: var(--chrome-silver-light);
+    }
+
+    /* ─── WHAT WE INSPECT ─── */
+    .section-inspect {
+      padding: 6rem 3rem;
+      background: var(--chrome-mid);
+    }
+
+    .inspect-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .inspect-inner h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .inspect-inner .subhead {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #9FB8D0;
+      margin-bottom: 3rem;
+    }
+
+    .inspect-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .inspect-item {
+      background: var(--chrome-mid);
+      padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .inspect-item:hover {
+      background: rgba(30,78,140,0.2);
+    }
+
+    .inspect-item-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .inspect-item h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .inspect-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── CTA SECTION ─── */
+    .section-cta {
+      padding: 7rem 3rem;
+      background: linear-gradient(135deg, #0D2040 0%, #0D1B2A 60%, #061525 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(30,78,140,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-inner h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+
+    .cta-inner h2 span {
+      color: var(--chrome-accent);
+    }
+
+    .cta-inner p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #9FB8D0;
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    /* ─── FORM PLACEHOLDER ─── */
+    .form-section {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .form-placeholder {
+      border: 2px dashed rgba(78,195,247,0.25);
+      background: rgba(78,195,247,0.03);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .form-placeholder span {
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.4;
+    }
+
+    /* ─── TESTIMONIALS (commented out in output) ─── */
+    /* 
+    .section-testimonials {
+      padding: 6rem 3rem;
+      background: var(--chrome-dark);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 2rem auto 0;
+    }
+    .testimonial-card {
+      padding: 2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top: 3px solid var(--chrome-blue);
+    }
+    .testimonial-quote {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #9FB8D0;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+    .testimonial-author {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: white;
+    }
+    .testimonial-detail {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    */
+
+    /* ─── FAILURE / STAKES SECTION ─── */
+    .section-stakes {
+      padding: 5rem 3rem;
+      background: rgba(10, 20, 35, 0.9);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .stakes-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .stakes-left h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .stakes-left h2 span {
+      color: #E57373;
+    }
+
+    .stakes-left p {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: #9FB8D0;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .stakes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stakes-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .stakes-list li::before {
+      content: '⚠';
+      color: #E57373;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* ─── CONTACT / FOOTER ─── */
+    .section-contact {
+      padding: 5rem 3rem 3rem;
+      background: var(--chrome-dark);
+      border-top: 1px solid rgba(78,195,247,0.1);
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-brand img {
+      height: 64px;
+      width: 64px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+    }
+
+    .contact-brand h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--chrome-accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-brand p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-col h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chrome-accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .contact-details li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .contact-details li .icon {
+      color: var(--chrome-accent);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .contact-details a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-details a:hover { color: var(--chrome-accent); }
+
+    .service-area-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-bar {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: rgba(144,164,174,0.5);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+      .hero-badge { display: none; }
+      .problem-grid,
+      .stakes-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .credentials { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: 1fr; }
+      .inspect-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
+      section { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+    }
+
+    @media (max-width: 600px) {
+      .credentials { grid-template-columns: 1fr; }
+      .inspect-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════════ -->
+  <nav>
+    <div class="nav-logo">
+      <img src="IMG_1453.PNG" alt="Chrome21 Home Inspections Logo" onerror="this.style.display='none'"/>
+      <div class="nav-logo-text">
+        <span class="brand">Chrome21</span>
+        <span class="sub">Home Inspections LLC</span>
+      </div>
+    </div>
+    <a href="#schedule" class="nav-cta">Schedule Inspection →</a>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Denver Metro Home Inspections</div>
+      <h1>Know Before<br><em>You Close.</em></h1>
+      <p class="hero-body">
+        Buying a home is the biggest financial decision of your life. We give you
+        the complete truth about your future home — so you can close with
+        confidence, or walk away with your savings intact.
+      </p>
+      <div class="hero-actions">
+        <a href="#schedule" class="btn-primary">Schedule Your Inspection →</a>
+        <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-ring">
+        <img src="IMG_1453.PNG" alt="Chrome21 Inspections" class="hero-badge-img"
+          onerror="this.style.display='none'"/>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PROBLEM
+  ═══════════════════════════════════════════ -->
+  <section class="section-problem">
+    <div class="problem-grid">
+      <div>
+        <div class="section-label">The Problem</div>
+        <h2 class="problem-headline">
+          You're being asked to commit<br>
+          <span>hundreds of thousands</span><br>
+          to a home you've seen twice.
+        </h2>
+      </div>
+      <div class="problem-cards">
+        <div class="problem-card">
+          <div class="problem-icon">🏚️</div>
+          <div class="problem-card-text">
+            <strong>Hidden defects you can't see</strong>
+            <p>Foundation cracks, failing HVAC, roof damage — the issues that cost the most are almost never visible during a showing.</p>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">😰</div>
+          <div class="problem-card-text">
+            <strong>The fear of a costly mistake</strong>
+            <p>One missed inspection item could mean $20,000 in unexpected repairs the year you move in.</p>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">🤷</div>
+          <div class="problem-card-text">
+            <strong>No leverage without the facts</strong>
+            <p>Without an inspection report, you're negotiating blind. You deserve to know what you're buying.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       GUIDE
+  ═══════════════════════════════════════════ -->
+  <section class="section-guide">
+    <div class="guide-inner">
+      <div class="section-label" style="justify-content:center;">Your Guide</div>
+      <h2>We've Seen Everything.<br>We'll Tell You Exactly What We Found.</h2>
+      <p class="subhead">
+        Chrome21 Home Inspections brings certified expertise and a no-nonsense commitment
+        to complete honesty — so you never have to guess.
+      </p>
+      <div class="credentials">
+        <div class="credential-card">
+          <div class="credential-number">✓</div>
+          <div class="credential-label">InterNACHI<br>Certified Inspector</div>
+        </div>
+        <div class="credential-card">
+          <div class="credential-number">📋</div>
+          <div class="credential-label">Same-Day<br>Digital Reports</div>
+        </div>
+        <div class="credential-card">
+          <div class="credential-number">🏡</div>
+          <div class="credential-label">Denver Metro<br>Specialist</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PLAN / HOW IT WORKS
+  ═══════════════════════════════════════════ -->
+  <section class="section-plan" id="how-it-works">
+    <div class="plan-inner">
+      <div class="section-label">The Plan</div>
+      <h2>Three Steps to<br>Close With Confidence</h2>
+      <p class="subhead">We made this simple on purpose. Here's exactly what happens.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Book in Minutes</h3>
+          <p>Schedule online or call Scott directly. We'll confirm your date and time within the hour. <strong>No waiting, no runaround.</strong></p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>We Inspect Everything</h3>
+          <p>Walk the home with us or let us work — your call. We examine <strong>every accessible system</strong> from roof to foundation, inside and out.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Report Same Day</h3>
+          <p>You'll receive a <strong>clear, photo-documented digital report</strong> written in plain English — no jargon, no guessing what anything means.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WHAT WE INSPECT
+  ═══════════════════════════════════════════ -->
+  <section class="section-inspect">
+    <div class="inspect-inner">
+      <div class="section-label">What We Cover</div>
+      <h2>A Complete Picture of the Home</h2>
+      <p class="subhead" style="font-family:'Lora',serif;font-style:italic;color:#9FB8D0;">From the crawl space to the ridge cap — nothing gets skipped.</p>
+      <div class="inspect-grid">
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🏠</div>
+          <h4>Roof & Attic</h4>
+          <p>Shingles, flashing, ventilation, insulation, and structural framing.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🏗️</div>
+          <h4>Foundation & Structure</h4>
+          <p>Foundation walls, floor framing, load-bearing elements, and crawl space.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">⚡</div>
+          <h4>Electrical Systems</h4>
+          <p>Panel, wiring, outlets, GFCI protection, and safety hazards.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🔧</div>
+          <h4>Plumbing</h4>
+          <p>Water heater, supply lines, drain systems, fixtures, and water pressure.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🌡️</div>
+          <h4>HVAC</h4>
+          <p>Heating and cooling equipment, ductwork, filters, and operational condition.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🚪</div>
+          <h4>Doors, Windows & Interior</h4>
+          <p>Functionality, sealing, moisture intrusion, and visible structural concerns.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🏊</div>
+          <h4>Exterior & Drainage</h4>
+          <p>Siding, grading, gutters, walkways, and water management.</p>
+        </div>
+        <div class="inspect-item">
+          <div class="inspect-item-icon">🔌</div>
+          <h4>Built-in Appliances</h4>
+          <p>Included appliances tested for proper operation and visible defects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STAKES / FAILURE
+  ═══════════════════════════════════════════ -->
+  <section class="section-stakes">
+    <div class="stakes-inner">
+      <div class="stakes-left">
+        <div class="section-label">The Stakes</div>
+        <h2>Don't Find Out<br><span>After You Close.</span></h2>
+        <p>Skipping or rushing through an inspection is one of the most expensive decisions a home buyer can make. These aren't hypotheticals — they're what buyers face every year in the Denver market.</p>
+      </div>
+      <ul class="stakes-list">
+        <li>Discovering a failing roof or foundation after closing — with no legal recourse and no seller to call</li>
+        <li>A furnace or HVAC system that fails the first Colorado winter, costing $8,000–$15,000 to replace</li>
+        <li>Buying a home with outdated electrical that your insurance won't cover</li>
+        <li>Losing your negotiating leverage because you went in without an inspection report</li>
+        <li>Living with a quiet, persistent doubt that you should have known better</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCHEDULE / FORM CTA
+  ═══════════════════════════════════════════ -->
+  <section class="section-cta" id="schedule">
+    <div class="cta-inner">
+      <div class="section-label" style="justify-content:center;">Get Started</div>
+      <h2>Ready to Close<br><span>With Confidence?</span></h2>
+      <p>Schedule your inspection today. Scott will follow up within the hour to confirm your appointment.</p>
+
+      <!-- ═══════════════════════════════════════
+           FORM EMBED PLACEHOLDER
+           Replace this div with your embed code
+           when you have it ready.
+      ═══════════════════════════════════════ -->
+      <div class="form-section">
+        <div class="form-placeholder">
+          <span>📋</span>
+          Form embed goes here<br>
+          <small style="opacity:0.6;">(Replace this block with your scheduling or contact form embed)</small>
+        </div>
+      </div>
+      <!-- END FORM PLACEHOLDER -->
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS — COMMENTED OUT
+       Uncomment when Scott has reviews ready.
+  ═══════════════════════════════════════════ -->
+  <!--
+  <section class="section-testimonials" style="padding:6rem 3rem;background:var(--chrome-dark);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-label">What Clients Say</div>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:3rem;">Real People. Real Peace of Mind.</h2>
+      <div class="testimonials-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+
+        <div class="testimonial-card" style="padding:2rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid var(--chrome-blue);">
+          <p style="font-family:'Lora',serif;font-style:italic;color:#9FB8D0;font-size:0.95rem;line-height:1.75;margin-bottom:1.25rem;">"Testimonial text goes here."</p>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:0.9rem;color:white;">Client Name</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Denver, CO</div>
+        </div>
+
+        <div class="testimonial-card" style="padding:2rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid var(--chrome-blue);">
+          <p style="font-family:'Lora',serif;font-style:italic;color:#9FB8D0;font-size:0.95rem;line-height:1.75;margin-bottom:1.25rem;">"Testimonial text goes here."</p>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:0.9rem;color:white;">Client Name</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Arvada, CO</div>
+        </div>
+
+        <div class="testimonial-card" style="padding:2rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-top:3px solid var(--chrome-blue);">
+          <p style="font-family:'Lora',serif;font-style:italic;color:#9FB8D0;font-size:0.95rem;line-height:1.75;margin-bottom:1.25rem;">"Testimonial text goes here."</p>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-size:0.9rem;color:white;">Client Name</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:0.2rem;">Littleton, CO</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  -->
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT / FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="section-contact">
+    <div class="contact-inner">
+
+      <div class="contact-brand">
+        <img src="IMG_1453.PNG" alt="Chrome21 Logo" onerror="this.style.display='none'"/>
+        <h3>Chrome21</h3>
+        <p>Home Inspections LLC</p>
+      </div>
+
+      <div class="contact-col">
+        <h4>Contact Scott Kimball</h4>
+        <ul class="contact-details">
+          <li>
+            <span class="icon">📞</span>
+            <a href="tel:8014049137">(801) 404-9137</a>
+          </li>
+          <li>
+            <span class="icon">✉️</span>
+            <a href="mailto:scott@chrome21homeinspections.com">scott@chrome21homeinspections.com</a>
+          </li>
+          <li>
+            <span class="icon">📍</span>
+            <span>Denver Metro Area, Colorado</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-col">
+        <h4>Service Area</h4>
+        <p class="service-area-note">
+          Serving home buyers and sellers throughout the Denver metro area including Denver, Aurora, Lakewood, Arvada, Westminster, Thornton, Centennial, Littleton, Englewood, and surrounding communities along the Front Range.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="footer-bar">
+      <span>© 2025 Chrome21 Home Inspections LLC · Denver, CO</span>
+      <span>Licensed &amp; Insured · InterNACHI Certified</span>
+    </div>
+  </footer>
+
+</body>
+</html>

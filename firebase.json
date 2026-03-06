@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "chrome21",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/.git/**",
+      "chrome21-build-instructions.md",
+      "chrome21.html"
+    ],
+    "cleanUrls": true
+  }
+}
+
