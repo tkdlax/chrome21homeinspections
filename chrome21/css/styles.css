@@ -302,8 +302,8 @@ h1 em {
 }
 
 .hero-badge-ring {
-  width: 180px;
-  height: 180px;
+  width: 450px;
+  height: 450px;
   border-radius: 50%;
   border: 1px solid rgba(78,195,247,0.2);
   display: flex;
@@ -315,14 +315,14 @@ h1 em {
 .hero-badge-ring::before {
   content: '';
   position: absolute;
-  inset: 8px;
+  inset: 20px;
   border-radius: 50%;
   border: 1px solid rgba(78,195,247,0.1);
 }
 
 .hero-badge-img {
-  width: 130px;
-  height: 130px;
+  width: 450px;
+  height: 450px;
   object-fit: cover;
   border-radius: 50%;
   filter: drop-shadow(0 4px 24px rgba(30,78,140,0.6));
