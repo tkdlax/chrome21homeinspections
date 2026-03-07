@@ -23,6 +23,8 @@ Static marketing website for **Chrome21 Home Inspections LLC** (Denver metro are
 | `chrome21/css/styles.css` | All styles (layout, responsive, print, reduced motion). |
 | `chrome21/js/main.js` | Vanilla JS: scroll-aware nav, smooth scroll, scroll-triggered animations. |
 | `chrome21/assets/logo.png` | Logo used in nav, hero, and favicon. |
+| `chrome21/sitemap.xml` | XML sitemap for search engines; lists the homepage. Served at `/sitemap.xml`. |
+| `chrome21/robots.txt` | Crawler instructions: allow all, points to sitemap. Served at `/robots.txt`. |
 | `chrome21/llms.txt` | Plain-text summary of the site for LLMs/AI; served at `/llms.txt`. |
 | `chrome21/README.md` | Short guide for editing content, form, and testimonials (non-technical). |
 | `.github/workflows/` | GitHub Actions: Firebase Hosting deploy on push to `master`, preview on PR. |
@@ -88,7 +90,9 @@ Static marketing website for **Chrome21 Home Inspections LLC** (Denver metro are
 
 ### SEO, accessibility, and LLMs
 
-- **Schema.org:** JSON-LD in `index.html` `<head>` for `LocalBusiness`, `WebSite`, and `WebPage` (Google and other crawlers).
+- **Schema.org:** JSON-LD in `index.html` `<head>` for `HomeAndConstructionBusiness`, `WebSite`, and `WebPage` (Google and other crawlers).
+- **Sitemap:** `chrome21/sitemap.xml` — XML sitemap listing the homepage; served at `https://chrome21homeinspections.com/sitemap.xml`. Linked from `<head>` for crawler discovery. Submit in Google Search Console for indexing.
+- **robots.txt:** `chrome21/robots.txt` — allows all crawlers (`User-agent: *`, `Allow: /`) and references the sitemap; served at `/robots.txt`.
 - **llms.txt:** Served at `/llms.txt` from `chrome21/llms.txt`. Describes the business, contact, and services for LLM/AI use; no code or secrets.
 - **Meta/OG:** Description, keywords, Open Graph, and geo tags are in `index.html` `<head>`.
 - **A11y:** Focus styles, semantic HTML, and a reduced-motion media query are in `chrome21/css/styles.css`.
