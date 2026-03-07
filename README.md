@@ -43,6 +43,7 @@ Static marketing website for **Chrome21 Home Inspections LLC** (Denver metro are
 
 **Live URLs (after deploy):**
 
+- `https://chrome21homeinspections.com`
 - `https://chrome21-home-inspections.web.app`
 - `https://chrome21-home-inspections.firebaseapp.com`
 
