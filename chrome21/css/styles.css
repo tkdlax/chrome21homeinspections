@@ -86,6 +86,31 @@ nav.scrolled {
   color: var(--chrome-silver);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-phone {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: var(--chrome-accent);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.nav-phone:hover {
+  color: white;
+}
+
+.nav-cta-call {
+  display: none;
+}
+
 .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -106,6 +131,11 @@ nav.scrolled {
 .nav-cta:hover {
   background: var(--chrome-blue-light);
   box-shadow: 0 0 20px rgba(78, 195, 247, 0.25);
+}
+
+/* Hide arrow on nav CTA on small screens so button fits on one line */
+.nav-cta-arrow {
+  display: inline;
 }
 
 /* ─── HERO ─── */
@@ -891,6 +921,9 @@ h1 em {
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   nav.scrolled { padding: 0.6rem 1.5rem; }
+  .nav-phone,
+  .nav-cta-schedule { display: none !important; }
+  .nav-cta-call { display: inline-flex !important; }
 
   .hero { padding: 7rem 1.5rem 4rem; }
   .hero-badge { display: none; }

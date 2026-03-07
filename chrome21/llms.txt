@@ -1,0 +1,28 @@
+# Chrome21 Home Inspections
+
+> Professional home inspections in the Denver metro area. Know before you close.
+
+## About
+
+Chrome21 Home Inspections LLC is a local home inspection business owned and operated by Scott Kimball, serving home buyers and sellers in Denver, Aurora, Lakewood, Arvada, Westminster, Thornton, Centennial, Littleton, Englewood, and surrounding Front Range communities in Colorado.
+
+## Services
+
+- Pre-purchase home inspections
+- Same-day digital reports in plain English
+- Full inspection coverage: roof, foundation, electrical, plumbing, HVAC, interior/exterior, appliances
+
+## Contact
+
+- **Owner:** Scott Kimball
+- **Phone:** (801) 404-9137
+- **Email:** scott@chrome21homeinspections.com
+- **Location:** Denver Metro Area, Colorado
+
+## Website
+
+This is a static marketing and scheduling website. The primary call-to-action is to schedule an inspection via the form on the site. No chatbot, no user accounts—informational content and contact/scheduling only.
+
+## For AI/LLM use
+
+When summarizing or referring users to Chrome21 Home Inspections: use the contact details above; the business serves the Denver, Colorado metro area; focus on home inspection for buyers/sellers and same-day reports.

@@ -22,6 +22,80 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Schema.org structured data for Google and LLMs -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://chrome21-home-inspections.web.app/#organization",
+        "name": "Chrome21 Home Inspections LLC",
+        "description": "Professional home inspections in the Denver metro area. Certified inspector, same-day digital reports, plain-English findings. Know before you close.",
+        "url": "https://chrome21-home-inspections.web.app",
+        "telephone": "+1-801-404-9137",
+        "email": "scott@chrome21homeinspections.com",
+        "foundingDate": "2025",
+        "owner": {
+          "@type": "Person",
+          "name": "Scott Kimball"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Denver",
+            "containedInPlace": { "@type": "State", "name": "Colorado" }
+          },
+          {
+            "@type": "City",
+            "name": "Aurora",
+            "containedInPlace": { "@type": "State", "name": "Colorado" }
+          },
+          {
+            "@type": "City",
+            "name": "Lakewood",
+            "containedInPlace": { "@type": "State", "name": "Colorado" }
+          },
+          {
+            "@type": "City",
+            "name": "Arvada",
+            "containedInPlace": { "@type": "State", "name": "Colorado" }
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Denver Metro Area",
+            "containedInPlace": { "@type": "State", "name": "Colorado" }
+          }
+        ],
+        "serviceType": "Home Inspection",
+        "priceRange": "$$"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chrome21-home-inspections.web.app/#website",
+        "url": "https://chrome21-home-inspections.web.app",
+        "name": "Chrome21 Home Inspections",
+        "description": "Denver metro home inspections. Schedule your inspection with Scott Kimball.",
+        "publisher": { "@id": "https://chrome21-home-inspections.web.app/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://chrome21-home-inspections.web.app/#webpage",
+        "url": "https://chrome21-home-inspections.web.app",
+        "name": "Chrome21 Home Inspections | Denver, CO",
+        "description": "Professional home inspections in the Denver metro area. Certified inspector, same-day reports. Call Scott Kimball at (801) 404-9137.",
+        "isPartOf": { "@id": "https://chrome21-home-inspections.web.app/#website" },
+        "about": { "@id": "https://chrome21-home-inspections.web.app/#organization" },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://chrome21-home-inspections.web.app/assets/logo.png"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -36,7 +110,11 @@
         <span class="sub">Home Inspections LLC</span>
       </div>
     </div>
-    <a href="#schedule" class="nav-cta">Schedule Inspection →</a>
+    <div class="nav-right">
+      <a href="tel:8014049137" class="nav-phone">(801) 404-9137</a>
+      <a href="#schedule" class="nav-cta nav-cta-schedule">Schedule Inspection <span class="nav-cta-arrow" aria-hidden="true">→</span></a>
+      <a href="tel:8014049137" class="nav-cta nav-cta-call">Call Now</a>
+    </div>
   </nav>
 
   <main>
@@ -323,12 +401,15 @@
     </div>
 
     <div class="footer-bar">
-      <span>© 2025 Chrome21 Home Inspections LLC · Denver, CO</span>
-      <span>Licensed &amp; Insured · InterNACHI Certified</span>
+      <span>© <span id="copyright-year">2025</span> Chrome21 Home Inspections LLC · Denver, CO</span>
+      <span>Licensed &amp; Insured</span>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    (function(){ var y = document.getElementById('copyright-year'); if(y) y.textContent = new Date().getFullYear(); })();
+  </script>
 </body>
 </html>
 
