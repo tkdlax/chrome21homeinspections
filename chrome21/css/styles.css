@@ -130,10 +130,6 @@ nav.scrolled {
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
-.social-link span {
-  pointer-events: none;
-}
-
 .social-link:hover {
   background: var(--chrome-accent);
   color: var(--chrome-dark);
@@ -141,8 +137,10 @@ nav.scrolled {
   transform: translateY(-1px);
 }
 
-.social-link--instagram span {
-  font-size: 0.68rem;
+.social-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
 }
 
 .footer-social {
