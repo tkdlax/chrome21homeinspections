@@ -107,6 +107,57 @@ nav.scrolled {
   color: white;
 }
 
+.nav-social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social-link {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(78,195,247,0.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--chrome-accent);
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-link span {
+  pointer-events: none;
+}
+
+.social-link:hover {
+  background: var(--chrome-accent);
+  color: var(--chrome-dark);
+  border-color: var(--chrome-accent);
+  transform: translateY(-1px);
+}
+
+.social-link--instagram span {
+  font-size: 0.68rem;
+}
+
+.footer-social {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-social .social-link {
+  width: 30px;
+  height: 30px;
+  font-size: 0.7rem;
+}
+
 .nav-cta-call {
   display: none;
 }

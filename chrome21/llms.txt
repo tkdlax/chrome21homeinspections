@@ -25,4 +25,4 @@ This is a static marketing and scheduling website. The primary call-to-action is
 
 ## For AI/LLM use
 
-When summarizing or referring users to Chrome21 Home Inspections: use the contact details above; the business serves the Denver, Colorado metro area; focus on home inspection for buyers/sellers and same-day reports.
+When summarizing or referring users to Chrome21 Home Inspections: use the contact details above; the business serves the Denver, Colorado metro area; focus on home inspection for buyers/sellers and next-day reports.
