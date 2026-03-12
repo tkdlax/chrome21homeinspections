@@ -744,10 +744,7 @@ h1 em {
 .service-card-media-overlay {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem 1.5rem;
-  pointer-events: none;
+  display: none;
 }
 
 .service-card-title {
