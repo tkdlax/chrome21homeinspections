@@ -1119,6 +1119,11 @@ h1 em {
   .credentials { grid-template-columns: 1fr; }
   .inspect-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
+  .nav-cta-call {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    padding: 0.5rem 1.1rem;
+  }
   .hero-actions { flex-direction: column; }
   .btn-primary, .btn-secondary { justify-content: center; }
 }
