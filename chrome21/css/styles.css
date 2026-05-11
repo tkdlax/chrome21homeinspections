@@ -519,45 +519,63 @@ h1 em {
   gap: 1.5rem;
 }
 
-/* Seals: same “card” language as credentials; small muted mat behind art only (legible black type, no bright slab) */
+/* Honor guarantee: award-style white disc + gold ring; GIF sits on section bg with no frame */
 .trust-seals {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: stretch;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 2rem 2.5rem;
   margin-top: 2rem;
 }
 
-.trust-seal-tile {
-  padding: 1rem 1.15rem;
-  background: rgba(13, 27, 42, 0.6);
-  border: 1px solid rgba(78, 195, 247, 0.1);
-  text-align: center;
-  transition: border-color 0.25s, transform 0.25s;
+.trust-seal-award {
+  flex-shrink: 0;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  background: radial-gradient(circle at 32% 22%, #ffffff 0%, #f2f5f8 52%, #e8ecf1 100%);
+  box-shadow:
+    inset 0 0 0 2px #d4af37,
+    inset 0 0 0 5px #fafbfc,
+    inset 0 0 0 7px #a67c00,
+    inset 0 0 0 8px rgba(212, 175, 55, 0.45),
+    0 10px 28px rgba(13, 27, 42, 0.4);
 }
 
-.trust-seal-tile:hover {
-  border-color: rgba(78, 195, 247, 0.28);
-  transform: translateY(-2px);
+.trust-seal-award a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  line-height: 0;
+  transition: transform 0.2s ease;
 }
 
-.trust-seal-tile a {
+.trust-seal-award a:hover {
+  transform: scale(1.03);
+}
+
+.trust-seal-award .trust-seal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.trust-seal-link--plain {
   display: inline-block;
   line-height: 0;
-  padding: 0.45rem 0.5rem;
-  background: linear-gradient(180deg, #e4edf4 0%, #d5e0eb 100%);
-  border-radius: 6px;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 1px 2px rgba(13, 27, 42, 0.25);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.trust-seal-tile a:hover {
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.75),
-    0 4px 14px rgba(13, 27, 42, 0.35);
+.trust-seal-link--plain:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
 }
 
 .trust-seal-img {
